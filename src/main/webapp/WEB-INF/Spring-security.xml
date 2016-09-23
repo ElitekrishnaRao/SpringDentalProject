@@ -1,0 +1,26 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.1.xsd">
+
+	<http auto-config="true">
+		<intercept-url pattern="/contact" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/searchPatient" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/saveInsuranceDetails" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/searchPatient" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/exportDocument" access="hasRole('ROLE_USER')" />
+		<form-login login-page="/" default-target-url="/contact"
+			username-parameter="j_username" password-parameter="j_password" login-processing-url="/j_spring_security_check"/>
+
+	</http>
+	<!-- <authentication-manager > <authentication-provider> <user-service> 
+		<user name="bill" password="abc123" authorities="ROLE_USER" /> <user name="admin" 
+		password="root123" authorities="ROLE_ADMIN" /> <user name="dba" password="root123" 
+		authorities="ROLE_ADMIN,ROLE_DBA" /> </user-service> </authentication-provider> 
+		</authentication-manager> -->
+
+	<authentication-manager>
+		<authentication-provider ref="customAuthenticationProvider" />
+	</authentication-manager>
+
+</beans:beans>
